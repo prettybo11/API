@@ -10,7 +10,7 @@ namespace CollegeSchedule.Controllers
     public class ScheduleController : ControllerBase
     {
         private readonly IScheduleService _service;
-        public ScheduleController(IScheduleService service, AppDbContext db)
+        public ScheduleController(IScheduleService service)
         {
             _service = service;
         }

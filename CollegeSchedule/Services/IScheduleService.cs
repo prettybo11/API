@@ -1,6 +1,9 @@
-﻿namespace CollegeSchedule.Services
+﻿using CollegeSchedule.DTO;
+namespace CollegeSchedule.Services
 {
-    public class IScheduleService
+    public interface IScheduleService
     {
+        Task<List<ScheduleByDateDto>> GetScheduleForGroup(string groupName, DateTime
+        startDate, DateTime endDate);
     }
 }
