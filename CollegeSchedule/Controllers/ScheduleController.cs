@@ -13,8 +13,16 @@ namespace CollegeSchedule.Controllers
         public ScheduleController(IScheduleService service)
         {
             _service = service;
+
+        }
+        [HttpGet("groups")]
+        public async Task<IActionResult> GetAllGroups()
+        {
+            var result = await _service.GetAllGroups();
+            return Ok(result);
         }
         [HttpGet("group/{groupName}")]
+
         public async Task<IActionResult> GetSchedule(string groupName, DateTime start, DateTime end)
         {
             var result = await _service.GetScheduleForGroup(groupName, start.Date, end.Date);

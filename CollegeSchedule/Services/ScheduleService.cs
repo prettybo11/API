@@ -19,6 +19,22 @@ namespace CollegeSchedule.Services
             var schedules = await LoadSchedules(group.GroupId, startDate, endDate);
             return BuildScheduleDto(startDate, endDate, schedules);
         }
+
+        public async Task<List<StudentGroupDto>> GetAllGroups()
+        {
+            return await _db.StudentGroups
+                .Include(g => g.Specialty)
+                .Select(g => new StudentGroupDto
+                {
+                    GroupId = g.GroupId,
+                    GroupName = g.GroupName,
+                    Course = g.Course,
+                    SpecialtyName = g.Specialty.Name
+                })
+                .OrderBy(g => g.Course)
+                .ThenBy(g => g.GroupName)
+                .ToListAsync();
+        }
         private static void ValidateDates(DateTime start, DateTime end)
         {
             if (start > end)
